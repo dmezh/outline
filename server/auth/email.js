@@ -45,7 +45,9 @@ router.post("email", async (ctx) => {
       user.lastSigninEmailSentAt &&
       user.lastSigninEmailSentAt > subMinutes(new Date(), 2)
     ) {
-      ctx.redirect(`${team.url}?notice=email-auth-ratelimit`);
+      ctx.body = {
+        redirect: `${team.url}?notice=email-auth-ratelimit`,
+      };
       return;
     }
 
@@ -93,7 +95,9 @@ router.get("email.callback", auth({ required: false }), async (ctx) => {
     // set cookies on response and redirect to team subdomain
     ctx.signIn(user, team, "email", false);
   } catch (err) {
-    ctx.redirect(`${process.env.URL}?notice=expired-token`);
+    ctx.body = {
+        redirect: `${process.env.URL}?notice=expired-token`,
+    };
   }
 });
 
