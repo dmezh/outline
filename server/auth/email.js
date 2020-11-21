@@ -58,6 +58,11 @@ router.post("email", async (ctx) => {
 
     user.lastSigninEmailSentAt = new Date();
     await user.save();
+  } else {
+      ctx.body = {
+        redirect: `/?notice=email-not-invited`,
+      };
+      return;
   }
 
   // respond with success regardless of whether an email was sent

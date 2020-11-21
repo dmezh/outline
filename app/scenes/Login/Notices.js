@@ -33,6 +33,11 @@ export default function Notices({ notice }: Props) {
           try again in a few minutes.
         </NoticeAlert>
       )}
+      {notice === "email-not-invited" && (
+        <NoticeAlert>
+          You need to have an invite in order to sign in with email.
+        </NoticeAlert>
+      )}
       {notice === "auth-error" && (
         <NoticeAlert>
           Authentication failed - we were unable to sign you in at this time.
